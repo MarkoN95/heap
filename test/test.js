@@ -107,6 +107,10 @@ describe("Static methods", function() {
       assert.throws(Heap.heapify.bind(null, array, comparator));
     });
 
+    it("should work on an empty array", function() {
+      assert.deepEqual(Heap.heapify([]), []);
+    });
+
     describe("not array like arguments", function() {
       [{}, "foobar", 2, null, undefined, true, false].forEach(function(item) {
         it("should throw", function() {
