@@ -87,12 +87,6 @@ describe("Internals", function() {
       assert.strictEqual(defaultCmp("long", "longer"), -1);
       assert.strictEqual(defaultCmp("longer", "long"), 1);
     });
-
-    it("should regard the only comparable value as preferable", function() {
-      assert.strictEqual(defaultCmp(null, 7), 1);
-      assert.strictEqual(defaultCmp(7, undefined), -1);
-      assert.strictEqual(defaultCmp(true, false), 0);
-    });
   });
 });
 

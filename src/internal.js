@@ -25,18 +25,7 @@ const swap = function swap(coll, idx_a, idx_b) {
   return coll;
 };
 
-const isComparable = function isComparable(v) {
-  return typeof v === "number" || typeof v === "string";
-};
-
-const defaultCmp = function(a, b) {
-  let a_ok = isComparable(a);
-  let b_ok = isComparable(b);
-
-  if(!a_ok && b_ok) { return 1; }
-  if(a_ok && !b_ok) { return -1; }
-  if(!a_ok && !b_ok) { return 0; }
-
+const defaultCmp = function defaultCmp(a, b) {
   if(typeof a === "number" && typeof b === "number") {
     return a < b ? -1 : (a > b ? 1 : 0);
   }
