@@ -63,15 +63,15 @@ const sift_down = function sift_down(coll, idx, heap_size, cmp) {
   let rChild = lChild + 1;
   let smallerChild;
 
-  if(rChild >= coll.length) {
+  if(rChild >= heap_size) {
     smallerChild = lChild;
   }
 
-  if(lChild >= coll.length) {
+  if(lChild >= heap_size) {
     return;
   }
 
-  if(rChild < coll.length) {
+  if(rChild < heap_size) {
     smallerChild = cmp(coll[lChild], coll[rChild]) <= -1 ? lChild : rChild;
   }
 
@@ -81,9 +81,21 @@ const sift_down = function sift_down(coll, idx, heap_size, cmp) {
   }
 };
 
+const sift_up = function sift_up(coll, idx, cmp) {
+  if(idx > 0) {
+    let parent = Math.floor((idx - 1) / 2);
+
+    if(cmp(coll[idx], coll[parent]) <= -1) {
+      swap(coll, idx, parent);
+      sift_up(coll, parent, cmp);
+    }
+  }
+};
+
 module.exports = {
   isArrayLike,
   swap,
   defaultCmp,
-  sift_down
+  sift_down,
+  sift_up
 };
