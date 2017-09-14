@@ -1,5 +1,5 @@
 {
-  "name": "heap",
+  "name": "@markon95/heap",
   "version": "1.0.0",
   "description": "A binary heap data structure",
   "main": "src/index.js",
