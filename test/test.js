@@ -2,6 +2,38 @@ const assert = require("assert");
 const Heap = require("../src/index");
 const { isArrayLike, swap, defaultCmp } = require("../src/internal");
 
+function hasHeapProperty(array, cmp) {
+  let lChild, rChild, parent;
+  for(let i = 0; i < (array.length - 1) / 2; i++) {
+    parent = array[i];
+
+    if(2*i + 1 < array.length) {
+      lChild = array[2*i + 1];
+      assert.ok(cmp(parent, lChild) <= -1);
+    }
+    if(2*i + 2 < array.length) {
+      rChild = array[2*i + 2];
+      assert.ok(cmp(parent, rChild) <= -1);
+    }
+  }
+}
+
+function heapFromArrayLike(cmp) {
+  let data = [6, 5, 4, 3, 2, 1];
+  let f = function() {
+    return arguments;
+  };
+
+  let heap1 = new Heap(data, cmp);
+  let heap2 = new Heap(f(...data), cmp);
+
+  assert.strictEqual(heap1.size(), heap2.size());
+
+  for(let i = 0; i < heap1.size(); i++) {
+    assert.strictEqual(heap1.pop(), heap2.pop());
+  }
+}
+
 describe("Internals", function() {
 
   describe("isArrayLike", function() {
@@ -64,24 +96,46 @@ describe("Internals", function() {
   });
 });
 
-describe("Static methods", function() {
+describe("Constructor", function() {
+  it("should make an empty heap with no arguments", function() {
+    let heap = new Heap();
+    assert.ok(heap instanceof Heap);
+  });
 
-  function hasHeapProperty(array, cmp) {
-    let lChild, rChild, parent;
-    for(let i = 0; i < (array.length - 1) / 2; i++) {
-      parent = array[i];
+  it("should accept a custom comparator function", function() {
+    let comparator = function(a, b) {
+      return a.value - b.value;
+    };
 
-      if(2*i + 1 < array.length) {
-        lChild = array[2*i + 1];
-        assert.ok(cmp(parent, lChild) <= -1);
-      }
-      if(2*i + 2 < array.length) {
-        rChild = array[2*i + 2];
-        assert.ok(cmp(parent, rChild) <= -1);
-      }
+    let heap = new Heap(comparator);
+
+    assert.strictEqual(heap._cmp, comparator);
+  });
+
+  it("should make a heap from an array like object", function() {
+    heapFromArrayLike();
+  });
+
+  it("should make a heap from an array like object with a custom comparator", function() {
+    heapFromArrayLike(function(a, b) {
+      return a - b;
+    });
+  });
+
+  it("should make a heap from another heap", function() {
+    let firstHeap = new Heap([3,2,1]);
+    let nextHeap = new Heap(firstHeap);
+
+    assert.strictEqual(firstHeap.size(), nextHeap.size());
+
+    for(let i = 0; i < 2; i++) {
+      assert.strictEqual(firstHeap.pop(), nextHeap.pop());
     }
-  }
+  });
 
+});
+
+describe("Static methods", function() {
   describe("heapify", function() {
     it("should arange the array elements s.t they satisfy the heap property", function() {
       const array = [5, 19, 39, 6, 11, 13, 25, 1];
@@ -121,28 +175,84 @@ describe("Static methods", function() {
   });
 
   describe("merge", function() {
+    it("should merge two heaps into a new one", function() {
+      let heap1 = new Heap([36, 39, 2, 82, 24, 14]);
+      let heap2 = new Heap([4, 9, 5, 8 ,3, 1, 11]);
 
+      let heap = Heap.merge(heap1, heap2);
+
+      hasHeapProperty(heap, defaultCmp);
+    });
+
+    it("should return undefined for non Heap arguments", function() {
+      let heap = Heap.merge({}, []);
+      assert.strictEqual(heap, undefined);
+    });
   });
 });
 
 describe("Instance methods", function() {
   describe("peek", function() {
+    it("should return undefined on an empty heap", function() {
+      assert.strictEqual((new Heap()).peek(), undefined);
+    });
 
+    it("should return the first element in a nonempt heap", function() {
+      let heap = new Heap([3, 2, 1, 5, 8]);
+      assert.strictEqual(heap.peek(), 1);
+    });
   });
 
   describe("push", function() {
+    it("should add a new element to the heap", function() {
+      let heap = new Heap();
+      heap.push(3)
+      .push(2)
+      .push(1)
+      .push(5)
+      .push(8);
 
+      hasHeapProperty(heap._data, defaultCmp);
+    });
   });
 
   describe("pop", function() {
+    it("should remove the first heap element", function() {
+      let data = [3, 2, 1, 5, 8];
+      let heap = new Heap(data);
+      let arr = [];
 
+      while(!heap.isEmpty()) {
+        arr.push(heap.pop());
+      }
+
+      assert.deepEqual(arr, data.sort());
+    });
+  });
+
+  describe("toArray", function() {
+    it("should return an array representation of the heap", function() {
+      let data = [6, 11, 15, 3, 2, 9];
+      let heap = new Heap(data);
+      let heap_arr = heap.toArray();
+
+      assert.ok(Array.isArray(heap_arr));
+    });
   });
 
   describe("size", function() {
-
+    it("should return the heap size", function() {
+      let heap = new Heap([1, 6, 3, 9, 2]);
+      assert.strictEqual(heap.size(), 5);
+    });
   });
 
   describe("isEmpty", function() {
-
+    it("should return true if the heap is empty", function() {
+      assert.strictEqual((new Heap()).isEmpty(), true);
+    });
+    it("should return false if heap is not empty", function() {
+      assert.strictEqual((new Heap([1])).isEmpty(), false);
+    });
   });
 });
