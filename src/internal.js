@@ -11,9 +11,6 @@ const isArrayLike = function isArrayLike(o) { // https://stackoverflow.com/a/240
 };
 
 const swap = function swap(coll, idx_a, idx_b) {
-  if(!isArrayLike(coll)) {
-    throw new Error("collection must be array like");
-  }
   if(idx_a < 0 || idx_a >= coll.length || idx_b < 0 || idx_b >= coll.length) {
     throw new Error("index out of bounds");
   }
@@ -52,13 +49,8 @@ const sift_down = function sift_down(coll, idx, heap_size, cmp) {
   let rChild = lChild + 1;
   let smallerChild;
 
-  if(rChild >= heap_size) {
-    smallerChild = lChild;
-  }
-
-  if(lChild >= heap_size) {
-    return;
-  }
+  if(rChild >= heap_size) { smallerChild = lChild; }
+  if(lChild >= heap_size) { return; }
 
   if(rChild < heap_size) {
     smallerChild = cmp(coll[lChild], coll[rChild]) <= -1 ? lChild : rChild;

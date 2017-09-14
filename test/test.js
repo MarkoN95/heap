@@ -60,10 +60,6 @@ describe("Internals", function() {
       assert.deepEqual([3, 2, 1], array);
     });
 
-    it("should throw if coll is not array like", function() {
-      assert.throws(swap.bind(null, "foobar", 0, 2));
-    });
-
     describe("indices out of bound", function() {
       [[-1, 0], [0, 4], [0, -1], [4, 0]].forEach(function(pair) {
         it("should throw", function() {
