@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha",
-    "docs": "jsdoc2md src/index.js > docs/API.md"
+    "docs": "jsdoc2md src/index.js > docs/API.md",
+    "umd": "webpack"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,11 @@
   },
   "homepage": "https://github.com/MarkoN95/heap#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
     "jsdoc-to-markdown": "^3.0.0",
-    "mocha": "^3.5.3"
+    "mocha": "^3.5.3",
+    "webpack": "^3.5.6"
   }
 }
