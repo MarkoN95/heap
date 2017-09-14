@@ -32,4 +32,4 @@ var arr = heap.toArray(); // [1, 3, 2, 5, 8]
 
 Documentation
 -------------
-* [API documentation](../blob/master/docs/API.md)
+* [API documentation](../master/docs/API.md)
