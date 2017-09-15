@@ -1,5 +1,9 @@
 Heap
 ====
+[![Build Status](https://travis-ci.org/MarkoN95/heap.svg?branch=master)](https://travis-ci.org/MarkoN95/heap)
+[![dependencies Status](https://david-dm.org/markon95/heap/status.svg)](https://david-dm.org/markon95/heap)
+[![npm version](https://badge.fury.io/js/%40markon95%2Fheap.svg)](https://badge.fury.io/js/%40markon95%2Fheap)
+
 A binary heap data structure written in Javascript
 
 Installation
