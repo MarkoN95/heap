@@ -174,9 +174,8 @@ describe("Static methods", function() {
       hasHeapProperty(heap, defaultCmp);
     });
 
-    it("should return undefined for non Heap arguments", function() {
-      let heap = Heap.merge({}, []);
-      assert.strictEqual(heap, undefined);
+    it("should throw for non Heap arguments", function() {
+      assert.throws(Heap.merge.bind({}, []));
     });
   });
 });

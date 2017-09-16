@@ -76,6 +76,9 @@ Heap.merge = function(h1, h2, comparator) {
 
     return new Heap(merged_data, comparator);
   }
+  else {
+    throw new Error("expected arguments to be heaps");
+  }
 };
 
 /**
