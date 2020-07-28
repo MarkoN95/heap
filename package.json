@@ -1,6 +1,6 @@
 {
   "name": "@darkblue_azurite/heap",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A binary heap data structure",
   "main": "src/index.js",
   "scripts": {
