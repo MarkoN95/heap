@@ -1,8 +1,8 @@
 Heap
 ====
-[![Build Status](https://travis-ci.org/MarkoN95/heap.svg?branch=master)](https://travis-ci.org/MarkoN95/heap)
-[![dependencies Status](https://david-dm.org/markon95/heap/status.svg)](https://david-dm.org/markon95/heap)
-[![npm version](https://badge.fury.io/js/%40markon95%2Fheap.svg)](https://badge.fury.io/js/%40markon95%2Fheap)
+[![Build Status](https://travis-ci.org/azurite/heap.svg?branch=master)](https://travis-ci.org/azurite/heap)
+[![dependencies Status](https://david-dm.org/azurite/heap/status.svg)](https://david-dm.org/azurite/heap)
+[![npm version](https://badge.fury.io/js/%40darkblue_azurite%2Fheap.svg)](https://badge.fury.io/js/%40darkblue_azurite%2Fheap)
 
 A binary heap data structure written in Javascript
 
@@ -12,13 +12,13 @@ Installation
 For node.js:
 
 ```
-npm install --save @markon95/heap
+npm install --save @darkblue_azurite/heap
 ```
 
 then require it:
 
 ```js
-var Heap = require("@markon95/heap");
+var Heap = require("@darkblue_azurite/heap");
 ```
 
 To use the library directly in the browser, copy the `heap.js` file from the lib

@@ -1,5 +1,5 @@
 {
-  "name": "@markon95/heap",
+  "name": "@darkblue_azurite/heap",
   "version": "1.0.4",
   "description": "A binary heap data structure",
   "main": "src/index.js",
@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MarkoN95/heap.git"
+    "url": "git+https://github.com/azurite/heap.git"
   },
   "keywords": [
     "heap"
   ],
-  "author": "MarkoN95",
+  "author": "darkblue_azurite",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MarkoN95/heap/issues"
+    "url": "https://github.com/azurite/heap/issues"
   },
-  "homepage": "https://github.com/MarkoN95/heap#readme",
+  "homepage": "https://github.com/azurite/heap#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
